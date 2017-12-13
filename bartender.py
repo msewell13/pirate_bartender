@@ -17,12 +17,14 @@ ingredients = {
     "fruity": ["slice of orange", "dash of cassis", "cherry on top"],
 }
 
+name = input('Hi! what is your name?')
+responses = ['y', 'yes', 'si', 'ye', 'yeah', 'ok', 'sure']
 
-def ask():
+def get_preferences():
     answers = {}
     for question in questions:
         answer = input('{} y/n: '.format(questions.get(question)))
-        if answer == 'y' or answer == 'yes':
+        if answer in responses:
             answer = True
         else:
             answer = False
@@ -35,18 +37,17 @@ def make_drink(preferences):
     for item in preferences:
         if preferences[item] == True:
             drink.append(random.choice(ingredients[item]))
-            # print(item)
-            # print(preferences.get(item))
-            # drink.append(random.choice(item))
-        else:
-            pass
     return drink
             
         
         
 if __name__ == '__main__':
-    resp1 = ask()
-    print(resp1)
-    resp2 = make_drink(resp1)
-    print(resp2)
+
+    while True:
+        resp1 = get_preferences()
+        resp2 = make_drink(resp1)
+        print(resp2)
+        order_more = input('Would you like another?: ')
+        if not order_more in responses:
+            break
     
